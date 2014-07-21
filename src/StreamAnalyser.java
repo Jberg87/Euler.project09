@@ -6,22 +6,25 @@ import java.util.Scanner;
  */
 public class StreamAnalyser {
 
-    private int highestProduct = 0;
+    private long highestProduct = 0;
     ArrayList<Integer> streamList = new ArrayList<Integer>();
 
-    public int getHighestProduct(String stream, int windowLength) {
+    public long getHighestProduct(String stream, int windowLength) {
         setStreamList(stream);
         defineHighestProduct(windowLength);
         return highestProduct;
     }
 
     private void defineHighestProduct(int windowLength) {
-        int newProduct;
+        long newProduct, loops;
+        loops = 0;
         for (int i = 0; i < streamList.size() - windowLength; i++) {
+            loops++;
             newProduct = 1;
             for (int j = 0; j < windowLength; j++) {
                 newProduct = newProduct * streamList.get(i + j);
             }
+
             if (newProduct > highestProduct) {
                 highestProduct = newProduct;
                 System.out.println(highestProduct);
